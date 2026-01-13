@@ -27,7 +27,6 @@ public class InventoryListener implements Listener {
         Inventory inventory = event.getInventory();
         String title = event.getView().getTitle();
         
-        // Sprawdź czy to GUI sklepu
         String shopTitle = plugin.getConfig().getString("gui.title", "&8× &6Sklep za Czas &8×")
             .replace("&", "§");
         
@@ -37,7 +36,6 @@ public class InventoryListener implements Listener {
             return;
         }
         
-        // Sprawdź czy to GUI admina
         String adminTitle = plugin.getConfig().getString("admin-gui.title", "&8× &4Panel Admina &8×")
             .replace("&", "§");
         
@@ -49,10 +47,8 @@ public class InventoryListener implements Listener {
     }
     
     private void handleShopClick(Player player, int slot) {
-        // Sprawdź czy to slot balansu
         int balanceSlot = plugin.getConfig().getInt("gui.balance-item.slot", 4);
         if (slot == balanceSlot) {
-            // Odśwież GUI
             player.closeInventory();
             ShopGUI gui = new ShopGUI(plugin, player);
             gui.open();
@@ -60,14 +56,12 @@ public class InventoryListener implements Listener {
             return;
         }
         
-        // Sprawdź czy to przedmiot ze sklepu
         ShopManager.ShopItem shopItem = plugin.getShopManager().getShopItem(slot);
         if (shopItem != null) {
             boolean success = plugin.getShopManager().purchaseItem(player, shopItem);
             
             if (success) {
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
-                // Odśwież GUI
                 player.closeInventory();
                 ShopGUI gui = new ShopGUI(plugin, player);
                 gui.open();
@@ -79,42 +73,42 @@ public class InventoryListener implements Listener {
     
     private void handleAdminClick(Player player, int slot) {
         switch (slot) {
-            case 10: // Przeładuj config
+            case 10:
                 plugin.reloadPluginConfig();
                 player.sendMessage(plugin.getMessage("reload-success"));
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
                 player.closeInventory();
                 break;
                 
-            case 12: // Podgląd sklepu
+            case 12:
                 player.closeInventory();
                 ShopGUI shopGUI = new ShopGUI(plugin, player);
                 shopGUI.open();
                 player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
                 break;
                 
-            case 14: // Zarządzaj przedmiotami
+            case 14:
                 player.sendMessage(plugin.getPrefix() + " §eEdytuj przedmioty w §6config.yml §ew sekcji §6shop-items");
                 player.sendMessage(plugin.getPrefix() + " §eNastępnie użyj §a/czasadmin reload");
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
                 break;
                 
-            case 16: // Statystyki
+            case 16:
                 player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
                 break;
                 
-            case 28: // Zarządzaj czasem graczy
+            case 28:
                 player.sendMessage(plugin.getPrefix() + " §cFunkcja w przyszłej wersji!");
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
                 break;
                 
-            case 30: // Zapisz dane
+            case 30:
                 plugin.getTimeManager().saveAllPlayers();
                 player.sendMessage(plugin.getMessage("config-saved"));
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
                 break;
                 
-            case 32: // Pomoc
+            case 32:
                 player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
                 break;
         }
