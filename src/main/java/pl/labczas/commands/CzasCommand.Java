@@ -29,7 +29,6 @@ public class CzasCommand implements CommandExecutor {
             return true;
         }
         
-        // Otwórz GUI sklepu
         ShopGUI gui = new ShopGUI(plugin, player);
         gui.open();
         
