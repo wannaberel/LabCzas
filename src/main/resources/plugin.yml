@@ -1,0 +1,28 @@
+name: LabCzas
+version: ${project.version}
+main: pl.labczas.LabCzas
+api-version: '1.21'
+author: TwójNick
+description: Plugin do sklepu za czas spędzony na serwerze
+website: https://github.com/TwójGitHub/LabCzas
+
+commands:
+  czas:
+    description: Otwiera sklep za czas
+    usage: /czas
+    aliases: [playtime, pts, timeshop]
+  czasadmin:
+    description: Panel administracyjny LabCzas
+    usage: /czasadmin
+    permission: labczas.admin
+    aliases: [ca, adminczas]
+
+permissions:
+  labczas.admin:
+    description: Dostęp do panelu administracyjnego
+    default: op
+  labczas.use:
+    description: Możliwość używania sklepu za czas
+    default: true
+
+softdepend: [Vault, LuckPerms]
