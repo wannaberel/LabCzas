@@ -77,7 +77,6 @@ public class ShopManager {
             return false;
         }
         
-        // Odejmij czas
         boolean success = plugin.getDataManager().removePlayerTime(uuid, 
                          plugin.getDataManager().hoursToMinutes(price));
         
@@ -86,7 +85,6 @@ public class ShopManager {
             return false;
         }
         
-        // Daj nagrodę
         giveReward(player, item);
         
         String msg = plugin.getMessage("purchase-success")
@@ -94,7 +92,6 @@ public class ShopManager {
             .replace("{price}", String.format("%.2f", price));
         player.sendMessage(msg);
         
-        // Zapisz dane
         plugin.getDataManager().saveData();
         
         return true;
@@ -163,13 +160,11 @@ public class ShopManager {
     }
     
     private void giveMoneyReward(Player player, ShopItem item) {
-        // Wymaga Vault - opcjonalnie możesz to zaimplementować później
         double money = item.getConfig().getDouble("reward-money", 0);
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), 
             "eco give " + player.getName() + " " + money);
     }
     
-    // Klasa wewnętrzna dla przedmiotów sklepu
     public static class ShopItem {
         private final String id;
         private final int slot;
