@@ -21,23 +21,18 @@ public class LabCzas extends JavaPlugin {
     public void onEnable() {
         instance = this;
         
-        // Tworzenie plików konfiguracyjnych
         saveDefaultConfig();
         
-        // Inicjalizacja managerów
         this.dataManager = new DataManager(this);
         this.timeManager = new TimeManager(this);
         this.shopManager = new ShopManager(this);
         
-        // Rejestracja komend
         getCommand("czas").setExecutor(new CzasCommand(this));
         getCommand("czasadmin").setExecutor(new CzasAdminCommand(this));
         
-        // Rejestracja listenerów
         Bukkit.getPluginManager().registerEvents(new InventoryListener(this), this);
         Bukkit.getPluginManager().registerEvents(new JoinQuitListener(this), this);
         
-        // Uruchomienie licznika czasu
         timeManager.startTimeCounter();
         
         getLogger().info("LabCzas został włączony!");
@@ -46,7 +41,6 @@ public class LabCzas extends JavaPlugin {
     
     @Override
     public void onDisable() {
-        // Zapisanie danych wszystkich graczy
         if (timeManager != null) {
             timeManager.stopTimeCounter();
             timeManager.saveAllPlayers();
@@ -61,7 +55,6 @@ public class LabCzas extends JavaPlugin {
         getLogger().info("Konfiguracja została przeładowana!");
     }
     
-    // Gettery
     public static LabCzas getInstance() {
         return instance;
     }
