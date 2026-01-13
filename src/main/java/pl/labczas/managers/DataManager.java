@@ -15,8 +15,6 @@ public class DataManager {
     private final LabCzas plugin;
     private final File dataFile;
     private FileConfiguration dataConfig;
-    
-    // Cache czasu graczy (UUID -> czas w minutach)
     private final Map<UUID, Double> playerTime;
     
     public DataManager(LabCzas plugin) {
@@ -40,7 +38,6 @@ public class DataManager {
         
         dataConfig = YamlConfiguration.loadConfiguration(dataFile);
         
-        // Wczytanie danych do cache
         if (dataConfig.contains("players")) {
             for (String uuidString : dataConfig.getConfigurationSection("players").getKeys(false)) {
                 UUID uuid = UUID.fromString(uuidString);
