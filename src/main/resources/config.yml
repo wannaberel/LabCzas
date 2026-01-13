@@ -1,0 +1,197 @@
+# LabCzas - Konfiguracja
+# Plugin do sklepu za czas spędzony na serwerze
+
+# Ustawienia ogólne
+settings:
+  # Czas w minutach między zapisami czasu graczy (1 = co minutę)
+  save-interval: 1
+  # Czy liczyć czas gdy gracz jest AFK?
+  count-afk-time: true
+  # Format czasu w GUI (HOURS, MINUTES)
+  time-format: HOURS
+  # Prefix wiadomości
+  prefix: "&8[&6LabCzas&8]&7"
+
+# Ustawienia GUI głównego (/czas)
+gui:
+  title: "&8× &6Sklep za Czas &8×"
+  size: 54 # Możliwe: 9, 18, 27, 36, 45, 54
+  
+  # Item pokazujący balans gracza
+  balance-item:
+    slot: 4
+    material: CLOCK
+    name: "&6&lTwój Czas"
+    lore:
+      - ""
+      - "&7Spędzony czas: &e{time} godzin"
+      - ""
+      - "&aKliknij aby odświeżyć"
+    glow: true
+  
+  # Dekoracyjne itemy
+  decoration:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    name: " "
+    slots: [0, 1, 2, 3, 5, 6, 7, 8, 45, 46, 47, 48, 50, 51, 52, 53]
+
+# Ustawienia GUI Admina
+admin-gui:
+  title: "&8× &4Panel Admina &8×"
+  size: 54
+
+# Przedmioty w sklepie
+# Typy nagród: ITEM, COMMAND, MONEY (wymaga Vault)
+shop-items:
+  
+  # Przykład 1: Zwykły item
+  diamond:
+    slot: 10
+    enabled: true
+    material: DIAMOND
+    amount: 16
+    name: "&b&l16x Diament"
+    lore:
+      - ""
+      - "&7Cena: &e{price} godzin"
+      - ""
+      - "&aKliknij aby kupić!"
+    glow: false
+    reward-type: ITEM
+    price: 5.0 # w godzinach
+    # Dla ITEM:
+    reward-item:
+      material: DIAMOND
+      amount: 16
+  
+  # Przykład 2: Item z enchantami
+  sword:
+    slot: 11
+    enabled: true
+    material: NETHERITE_SWORD
+    amount: 1
+    name: "&c&lMiecz Mistrza"
+    lore:
+      - ""
+      - "&7Cena: &e{price} godzin"
+      - ""
+      - "&aKliknij aby kupić!"
+    glow: true
+    reward-type: ITEM
+    price: 20.0
+    reward-item:
+      material: NETHERITE_SWORD
+      amount: 1
+      enchantments:
+        SHARPNESS: 5
+        UNBREAKING: 3
+        MENDING: 1
+      display-name: "&c&lMiecz Mistrza"
+      lore:
+        - "&7Legendarny miecz"
+        - "&7dla najlepszych wojowników!"
+  
+  # Przykład 3: Komenda (np. ranga)
+  vip-rank:
+    slot: 12
+    enabled: true
+    material: GOLDEN_APPLE
+    amount: 1
+    name: "&6&lRanga VIP"
+    lore:
+      - ""
+      - "&7Cena: &e{price} godzin"
+      - ""
+      - "&eOtrzymasz rangę VIP!"
+      - ""
+      - "&aKliknij aby kupić!"
+    glow: true
+    reward-type: COMMAND
+    price: 50.0
+    # Dla COMMAND (można dodać wiele komend):
+    reward-commands:
+      - "lp user {player} parent add vip"
+      - "tell {player} &aOtrzymałeś rangę VIP!"
+  
+  # Przykład 4: Pieniądze (wymaga Vault)
+  money:
+    slot: 13
+    enabled: true
+    material: GOLD_INGOT
+    amount: 1
+    name: "&e&l10000$"
+    lore:
+      - ""
+      - "&7Cena: &e{price} godzin"
+      - ""
+      - "&aKliknij aby kupić!"
+    glow: false
+    reward-type: MONEY
+    price: 10.0
+    # Dla MONEY:
+    reward-money: 10000
+  
+  # Przykład 5: Shulker Box z itemami
+  starter-kit:
+    slot: 14
+    enabled: true
+    material: SHULKER_BOX
+    amount: 1
+    name: "&d&lZestaw Startowy"
+    lore:
+      - ""
+      - "&7Zawiera:"
+      - "&8▪ &732x Złote Jabłko"
+      - "&8▪ &764x Steak"
+      - "&8▪ &7Pełna zbroja diamentowa"
+      - ""
+      - "&7Cena: &e{price} godzin"
+      - ""
+      - "&aKliknij aby kupić!"
+    glow: true
+    reward-type: COMMAND
+    price: 15.0
+    reward-commands:
+      - "give {player} golden_apple 32"
+      - "give {player} cooked_beef 64"
+      - "give {player} diamond_helmet 1"
+      - "give {player} diamond_chestplate 1"
+      - "give {player} diamond_leggings 1"
+      - "give {player} diamond_boots 1"
+  
+  # Przykład 6: Elytra
+  elytra:
+    slot: 15
+    enabled: true
+    material: ELYTRA
+    amount: 1
+    name: "&f&lElytra"
+    lore:
+      - ""
+      - "&7Cena: &e{price} godzin"
+      - ""
+      - "&aKliknij aby kupić!"
+    glow: true
+    reward-type: ITEM
+    price: 30.0
+    reward-item:
+      material: ELYTRA
+      amount: 1
+      enchantments:
+        UNBREAKING: 3
+        MENDING: 1
+
+# Wiadomości
+messages:
+  no-permission: "&cNie masz uprawnień!"
+  reload-success: "&aPomyślnie przeładowano konfigurację!"
+  not-enough-time: "&cNie masz wystarczająco czasu! Potrzebujesz jeszcze &e{needed} godzin&c."
+  purchase-success: "&aZakupiono &e{item}&a za &e{price} godzin&a!"
+  purchase-error: "&cWystąpił błąd podczas zakupu!"
+  admin-mode-enabled: "&aTryb edycji włączony!"
+  admin-mode-disabled: "&cTryb edycji wyłączony!"
+  item-added: "&aDodano przedmiot do sklepu!"
+  item-removed: "&cUsunieto przedmiot ze sklepu!"
+  config-saved: "&aKonfiguracja została zapisana!"
+  player-only: "&cTa komenda jest tylko dla graczy!"
