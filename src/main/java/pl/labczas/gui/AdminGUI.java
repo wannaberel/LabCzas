@@ -32,32 +32,25 @@ public class AdminGUI {
     }
     
     private void setupGUI() {
-        // Przeładuj konfigurację
         addItem(10, Material.ENDER_EYE, "&a&lPrzeładuj Config", 
             "&7Kliknij aby przeładować", "&7konfigurację pluginu");
         
-        // Podgląd sklepu
         addItem(12, Material.CHEST, "&e&lPodgląd Sklepu", 
             "&7Kliknij aby zobaczyć", "&7jak wygląda sklep");
         
-        // Zarządzaj przedmiotami
         addItem(14, Material.DIAMOND, "&b&lZarządzaj Przedmiotami", 
             "&7Edytuj przedmioty w sklepie", "&7poprzez config.yml");
         
-        // Statystyki
         addItem(16, Material.BOOK, "&6&lStatystyki", 
-            "&7Liczba graczy: &e" + plugin.getDataManager().getClass(),
+            "&7Liczba graczy: &eDB",
             "&7Przedmiotów w sklepie: &e" + plugin.getShopManager().getShopItems().size());
         
-        // Zarządzaj czasem graczy
         addItem(28, Material.CLOCK, "&c&lZarządzaj Czasem Graczy", 
             "&7Dodaj/usuń czas graczom", "&7(W przyszłej wersji)");
         
-        // Zapisz dane
         addItem(30, Material.WRITABLE_BOOK, "&d&lZapisz Dane", 
             "&7Ręcznie zapisz dane", "&7wszystkich graczy");
         
-        // Pomoc
         addItem(32, Material.PAPER, "&f&lPomoc", 
             "&7Edytuj przedmioty w pliku:", 
             "&econfig.yml &7w sekcji", 
@@ -66,7 +59,6 @@ public class AdminGUI {
             "&7Po zmianach użyj opcji",
             "&aPrzeładuj Config");
         
-        // Dekoracja
         ItemStack glass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta glassMeta = glass.getItemMeta();
         if (glassMeta != null) {
