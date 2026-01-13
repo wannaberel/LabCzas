@@ -29,7 +29,6 @@ public class CzasAdminCommand implements CommandExecutor {
             return true;
         }
         
-        // Jeśli są argumenty
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("reload")) {
                 plugin.reloadPluginConfig();
@@ -38,7 +37,6 @@ public class CzasAdminCommand implements CommandExecutor {
             }
         }
         
-        // Otwórz GUI admina
         AdminGUI gui = new AdminGUI(plugin, player);
         gui.open();
         
