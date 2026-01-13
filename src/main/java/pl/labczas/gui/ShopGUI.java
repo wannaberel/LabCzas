@@ -34,15 +34,11 @@ public class ShopGUI {
     }
     
     private void setupGUI() {
-        // Dodaj przedmioty dekoracyjne
         if (plugin.getConfig().getBoolean("gui.decoration.enabled", true)) {
             addDecoration();
         }
         
-        // Dodaj item balansu
         addBalanceItem();
-        
-        // Dodaj przedmioty ze sklepu
         addShopItems();
     }
     
@@ -81,7 +77,6 @@ public class ShopGUI {
         if (meta != null) {
             meta.setDisplayName(name);
             
-            // Zamień placeholder w lore
             String playerTime = plugin.getTimeManager().getFormattedTime(player.getUniqueId());
             List<String> lore = new ArrayList<>();
             for (String line : loreTemplate) {
@@ -108,7 +103,6 @@ public class ShopGUI {
             if (meta != null) {
                 meta.setDisplayName(shopItem.getName());
                 
-                // Przetwórz lore i zamień placeholdery
                 List<String> lore = new ArrayList<>();
                 for (String line : shopItem.getLore()) {
                     lore.add(line.replace("&", "§")
